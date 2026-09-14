@@ -1,0 +1,72 @@
+[
+  {
+    "symbol": "frxAUDJPY",
+    "display_name": "AUD/JPY",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxAUDUSD",
+    "display_name": "AUD/USD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURAUD",
+    "display_name": "EUR/AUD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURCAD",
+    "display_name": "EUR/CAD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURCHF",
+    "display_name": "EUR/CHF",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURGBP",
+    "display_name": "EUR/GBP",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURJPY",
+    "display_name": "EUR/JPY",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURUSD",
+    "display_name": "EUR/USD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxGBPAUD",
+    "display_name": "GBP/AUD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxGBPJPY",
+    "display_name": "GBP/JPY",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxGBPUSD",
+    "display_name": "GBP/USD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxUSDCAD",
+    "display_name": "USD/CAD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxUSDCHF",
+    "display_name": "USD/CHF",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxUSDJPY",
+    "display_name": "USD/JPY",
+    "market": "forex"
+  }
+]

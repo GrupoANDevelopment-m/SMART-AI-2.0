@@ -1,0 +1,206 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Primitives
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isSignedIn() { return request.auth != null && request.auth.token.email_verified == true; }
+    function isAdmin() { return false; } // No admin role defined yet
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    
+    // Schema Validators
+    function isValidSetup(data) {
+      return data.keys().hasAll(['asset', 'type', 'smcContext', 'timestamp', 'uid']) &&
+             data.asset is string && data.asset.size() <= 100 &&
+             data.type in ['BUY', 'SELL'] &&
+             (!('confidence' in data) || data.confidence is number) &&
+             data.smcContext is map &&
+             (!('elliottWave' in data) || (data.elliottWave is string && data.elliottWave.size() <= 100)) &&
+             (!('outcome' in data) || data.outcome in ['PENDING', 'SUCCESS', 'FAILURE']) &&
+             data.timestamp is string && data.timestamp.size() <= 100 &&
+             (!('pnl' in data) || data.pnl is number) &&
+             data.uid == request.auth.uid;
+    }
+
+    function isValidStrategy(data) {
+      return data.keys().hasAll(['name', 'successRate', 'totalTrades', 'uid']) &&
+             data.name is string && data.name.size() <= 100 &&
+             data.successRate is number &&
+             data.totalTrades is number &&
+             (!('parameters' in data) || data.parameters is map) &&
+             (!('isValidated' in data) || data.isValidated is bool) &&
+             data.uid == request.auth.uid;
+    }
+
+    function isValidGoal(data) {
+      return data.keys().hasAll(['title', 'target', 'status', 'uid']) &&
+             data.title is string && data.title.size() <= 200 &&
+             (!('description' in data) || (data.description is string && data.description.size() <= 1000)) &&
+             data.target is number &&
+             (!('current' in data) || data.current is number) &&
+             (!('deadline' in data) || (data.deadline is string && data.deadline.size() <= 100)) &&
+             data.status in ['IN_PROGRESS', 'ACHIEVED', 'FAILED'] &&
+             data.uid == request.auth.uid;
+    }
+
+    function isValidKnowledge(data) {
+      return data.keys().hasAll(['title', 'content', 'uid']) &&
+             data.title is string && data.title.size() <= 200 &&
+             data.content is string && data.content.size() <= 10000 &&
+             (!('category' in data) || (data.category is string && data.category.size() <= 100)) &&
+             (!('tags' in data) || (data.tags is list && data.tags.size() <= 20 && (data.tags.size() == 0 || data.tags[0] is string))) &&
+             (!('timestamp' in data) || (data.timestamp is string && data.timestamp.size() <= 100)) &&
+             data.uid == request.auth.uid;
+    }
+
+    function isValidSkill(data) {
+      return data.keys().hasAll(['name', 'condition', 'action', 'uid']) &&
+             data.name is string && data.name.size() <= 200 &&
+             data.condition is string && data.condition.size() <= 1000 &&
+             data.action is string && data.action.size() <= 1000 &&
+             (!('successCount' in data) || data.successCount is number) &&
+             (!('isActive' in data) || data.isActive is bool) &&
+             data.uid == request.auth.uid;
+    }
+
+    function isValidAgentState(data) {
+      return data.keys().hasAll(['uid']) &&
+             (!('mood' in data) || data.mood in ['CONFIDENT', 'NEUTRAL', 'DISCIPLINED']) &&
+             (!('volatilityThreshold' in data) || data.volatilityThreshold is number) &&
+             (!('riskMultiplier' in data) || data.riskMultiplier is number) &&
+             (!('lastOptimization' in data) || (data.lastOptimization is string && data.lastOptimization.size() <= 100)) &&
+             data.uid == request.auth.uid;
+    }
+
+    function isValidChatMessage(data) {
+      return data.keys().hasAll(['role', 'content', 'timestamp', 'uid']) &&
+             data.role in ['user', 'assistant'] &&
+             data.content is string && data.content.size() <= 5000 &&
+             data.timestamp is string && data.timestamp.size() <= 100 &&
+             data.uid == request.auth.uid;
+    }
+
+    function isValidAgentMemory(data) {
+      return data.keys().hasAll(['uid']) &&
+             (!('strategic' in data) || data.strategic is map) &&
+             (!('tactical' in data) || data.tactical is map) &&
+             (!('experience' in data) || data.experience is map) &&
+             (!('theoretical' in data) || data.theoretical is map) &&
+             (!('alignment' in data) || data.alignment is map) &&
+             (!('simulation' in data) || data.simulation is map) &&
+             data.uid == request.auth.uid;
+    }
+
+    function isValidEventMemory(data) {
+      return data.keys().hasAll(['uid', 'createdAt']) &&
+             data.createdAt is string && data.createdAt.size() <= 100 &&
+             // Episodic memory includes whatever was passed, usually as map or strings
+             // Let's enforce that everything else is valid types if needed
+             // but we'll stick to minimum required
+             data.uid == request.auth.uid;
+    }
+
+    // Collections
+    
+    match /setups/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(docId) && isValidSetup(incoming()) && incoming().keys().size() <= 8;
+      allow update: if isSignedIn() && isValidId(docId) && isValidSetup(incoming()) &&
+                    incoming().uid == existing().uid &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['outcome', 'pnl', 'confidence']);
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+
+    match /strategies/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(docId) && isValidStrategy(incoming()) && incoming().keys().size() <= 6;
+      allow update: if isSignedIn() && isValidId(docId) && isValidStrategy(incoming()) &&
+                    incoming().uid == existing().uid &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['successRate', 'totalTrades', 'isValidated', 'parameters']);
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+
+    match /goals/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(docId) && isValidGoal(incoming()) && incoming().keys().size() <= 7;
+      allow update: if isSignedIn() && isValidId(docId) && isValidGoal(incoming()) &&
+                    incoming().uid == existing().uid &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['current', 'status', 'description', 'target', 'deadline']);
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+
+    match /knowledge/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(docId) && isValidKnowledge(incoming()) && incoming().keys().size() <= 6;
+      allow update: if isSignedIn() && isValidId(docId) && isValidKnowledge(incoming()) &&
+                    incoming().uid == existing().uid &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['content', 'category', 'tags', 'timestamp', 'title']);
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+
+    match /skills/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(docId) && isValidSkill(incoming()) && incoming().keys().size() <= 6;
+      allow update: if isSignedIn() && isValidId(docId) && isValidSkill(incoming()) &&
+                    incoming().uid == existing().uid &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['successCount', 'isActive', 'action', 'condition']);
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+
+    match /state/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      // state handles single document per user so docId should probably be uid
+      allow create: if isSignedIn() && isValidId(docId) && docId == request.auth.uid && isValidAgentState(incoming()) && incoming().keys().size() <= 5;
+      allow update: if isSignedIn() && isValidId(docId) && isValidAgentState(incoming()) &&
+                    incoming().uid == existing().uid && docId == request.auth.uid &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['mood', 'volatilityThreshold', 'riskMultiplier', 'lastOptimization']);
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+
+    match /chats/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(docId) && isValidChatMessage(incoming()) && incoming().keys().size() <= 4;
+      allow update: if false; // Chats should be immutable
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+
+    match /agent_memory/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      // Also uses uid as docId usually
+      allow create: if isSignedIn() && isValidId(docId) && docId == request.auth.uid && isValidAgentMemory(incoming()) && incoming().keys().size() <= 7;
+      allow update: if isSignedIn() && isValidId(docId) && isValidAgentMemory(incoming()) &&
+                    incoming().uid == existing().uid && docId == request.auth.uid &&
+                    incoming().diff(existing()).affectedKeys().hasOnly(['strategic', 'tactical', 'experience', 'theoretical', 'alignment', 'simulation']);
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+
+    match /episodic_memory/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(docId) && isValidEventMemory(incoming());
+      allow update: if false; // Memory points are immutable
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+
+    match /semantic_memory/{docId} {
+      allow get: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(docId) && isValidEventMemory(incoming());
+      allow update: if false; // Memory points are immutable
+      allow delete: if isSignedIn() && isValidId(docId) && existing().uid == request.auth.uid;
+    }
+  }
+}

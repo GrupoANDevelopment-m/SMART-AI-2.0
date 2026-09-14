@@ -1,0 +1,11 @@
+[
+  {
+    "category": "Strategy",
+    "concept": "Regra de Ouro de Alinhamento de Tendência Multi-Timeframe",
+    "description": "Regra que estabelece a necessidade de alinhar todas as operações com a tendência identificada no gráfico de 1 hora (H1), evitando assim entrar contra a direção do mercado no timeframe principal. Como exemplo específico, quando H1 está em alta, o trader deve buscar exclusivamente oportunidades de compra no gráfico de 15 minutos (M15).",
+    "actionableRule": "1. Analise o gráfico H1 para definir a tendência (alta, baixa ou lateral). 2. Se H1 estiver em tendência de alta, considere apenas sinais de compra no gráfico M15. 3. Se H1 estiver em tendência de baixa, considere apenas sinais de venda no gráfico M15. 4. Nunca execute operações que contrariem a direção da tendência em H1.",
+    "source": "Manual",
+    "id": "7zeml5qkgdj",
+    "timestamp": 1774083044820
+  }
+]

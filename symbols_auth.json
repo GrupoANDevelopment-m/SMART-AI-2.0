@@ -1,0 +1,462 @@
+[
+  {
+    "symbol": "WLDAUD",
+    "display_name": "AUD Basket",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "frxAUDCAD",
+    "display_name": "AUD/CAD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxAUDCHF",
+    "display_name": "AUD/CHF",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxAUDJPY",
+    "display_name": "AUD/JPY",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxAUDNZD",
+    "display_name": "AUD/NZD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxAUDUSD",
+    "display_name": "AUD/USD",
+    "market": "forex"
+  },
+  {
+    "symbol": "OTC_AS51",
+    "display_name": "Australia 200",
+    "market": "indices"
+  },
+  {
+    "symbol": "cryBTCUSD",
+    "display_name": "BTC/USD",
+    "market": "cryptocurrency"
+  },
+  {
+    "symbol": "RDBEAR",
+    "display_name": "Bear Market Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "BOOM50",
+    "display_name": "Boom 50 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "BOOM150N",
+    "display_name": "Boom 150 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "BOOM300N",
+    "display_name": "Boom 300 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "BOOM500",
+    "display_name": "Boom 500 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "BOOM600",
+    "display_name": "Boom 600 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "BOOM900",
+    "display_name": "Boom 900 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "BOOM1000",
+    "display_name": "Boom 1000 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "RDBULL",
+    "display_name": "Bull Market Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "CRASH50",
+    "display_name": "Crash 50 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "CRASH150N",
+    "display_name": "Crash 150 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "CRASH300N",
+    "display_name": "Crash 300 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "CRASH500",
+    "display_name": "Crash 500 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "CRASH600",
+    "display_name": "Crash 600 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "CRASH900",
+    "display_name": "Crash 900 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "CRASH1000",
+    "display_name": "Crash 1000 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "cryETHUSD",
+    "display_name": "ETH/USD",
+    "market": "cryptocurrency"
+  },
+  {
+    "symbol": "WLDEUR",
+    "display_name": "EUR Basket",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "frxEURAUD",
+    "display_name": "EUR/AUD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURCAD",
+    "display_name": "EUR/CAD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURCHF",
+    "display_name": "EUR/CHF",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURGBP",
+    "display_name": "EUR/GBP",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURJPY",
+    "display_name": "EUR/JPY",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURNZD",
+    "display_name": "EUR/NZD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxEURUSD",
+    "display_name": "EUR/USD",
+    "market": "forex"
+  },
+  {
+    "symbol": "OTC_SX5E",
+    "display_name": "Euro 50",
+    "market": "indices"
+  },
+  {
+    "symbol": "OTC_FCHI",
+    "display_name": "France 40",
+    "market": "indices"
+  },
+  {
+    "symbol": "WLDGBP",
+    "display_name": "GBP Basket",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "frxGBPAUD",
+    "display_name": "GBP/AUD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxGBPCAD",
+    "display_name": "GBP/CAD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxGBPCHF",
+    "display_name": "GBP/CHF",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxGBPJPY",
+    "display_name": "GBP/JPY",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxGBPNOK",
+    "display_name": "GBP/NOK",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxGBPNZD",
+    "display_name": "GBP/NZD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxGBPUSD",
+    "display_name": "GBP/USD",
+    "market": "forex"
+  },
+  {
+    "symbol": "OTC_GDAXI",
+    "display_name": "Germany 40",
+    "market": "indices"
+  },
+  {
+    "symbol": "WLDXAU",
+    "display_name": "Gold Basket",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "frxXAUUSD",
+    "display_name": "Gold/USD",
+    "market": "commodities"
+  },
+  {
+    "symbol": "OTC_HSI",
+    "display_name": "Hong Kong 50",
+    "market": "indices"
+  },
+  {
+    "symbol": "OTC_N225",
+    "display_name": "Japan 225",
+    "market": "indices"
+  },
+  {
+    "symbol": "JD10",
+    "display_name": "Jump 10 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "JD25",
+    "display_name": "Jump 25 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "JD50",
+    "display_name": "Jump 50 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "JD75",
+    "display_name": "Jump 75 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "JD100",
+    "display_name": "Jump 100 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "frxNZDJPY",
+    "display_name": "NZD/JPY",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxNZDUSD",
+    "display_name": "NZD/USD",
+    "market": "forex"
+  },
+  {
+    "symbol": "OTC_AEX",
+    "display_name": "Netherlands 25",
+    "market": "indices"
+  },
+  {
+    "symbol": "frxXPDUSD",
+    "display_name": "Palladium/USD",
+    "market": "commodities"
+  },
+  {
+    "symbol": "frxXPTUSD",
+    "display_name": "Platinum/USD",
+    "market": "commodities"
+  },
+  {
+    "symbol": "RB100",
+    "display_name": "Range Break 100 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "RB200",
+    "display_name": "Range Break 200 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "frxXAGUSD",
+    "display_name": "Silver/USD",
+    "market": "commodities"
+  },
+  {
+    "symbol": "stpRNG",
+    "display_name": "Step Index 100",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "stpRNG2",
+    "display_name": "Step Index 200",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "stpRNG3",
+    "display_name": "Step Index 300",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "stpRNG4",
+    "display_name": "Step Index 400",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "stpRNG5",
+    "display_name": "Step Index 500",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "OTC_SSMI",
+    "display_name": "Swiss 20",
+    "market": "indices"
+  },
+  {
+    "symbol": "OTC_FTSE",
+    "display_name": "UK 100",
+    "market": "indices"
+  },
+  {
+    "symbol": "OTC_SPC",
+    "display_name": "US 500",
+    "market": "indices"
+  },
+  {
+    "symbol": "OTC_NDX",
+    "display_name": "US Tech 100",
+    "market": "indices"
+  },
+  {
+    "symbol": "WLDUSD",
+    "display_name": "USD Basket",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "frxUSDCAD",
+    "display_name": "USD/CAD",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxUSDCHF",
+    "display_name": "USD/CHF",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxUSDJPY",
+    "display_name": "USD/JPY",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxUSDMXN",
+    "display_name": "USD/MXN",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxUSDNOK",
+    "display_name": "USD/NOK",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxUSDPLN",
+    "display_name": "USD/PLN",
+    "market": "forex"
+  },
+  {
+    "symbol": "frxUSDSEK",
+    "display_name": "USD/SEK",
+    "market": "forex"
+  },
+  {
+    "symbol": "1HZ10V",
+    "display_name": "Volatility 10 (1s) Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "R_10",
+    "display_name": "Volatility 10 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "1HZ15V",
+    "display_name": "Volatility 15 (1s) Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "1HZ25V",
+    "display_name": "Volatility 25 (1s) Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "R_25",
+    "display_name": "Volatility 25 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "1HZ30V",
+    "display_name": "Volatility 30 (1s) Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "1HZ50V",
+    "display_name": "Volatility 50 (1s) Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "R_50",
+    "display_name": "Volatility 50 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "1HZ75V",
+    "display_name": "Volatility 75 (1s) Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "R_75",
+    "display_name": "Volatility 75 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "1HZ90V",
+    "display_name": "Volatility 90 (1s) Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "1HZ100V",
+    "display_name": "Volatility 100 (1s) Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "R_100",
+    "display_name": "Volatility 100 Index",
+    "market": "synthetic_index"
+  },
+  {
+    "symbol": "OTC_DJI",
+    "display_name": "Wall Street 30",
+    "market": "indices"
+  }
+]

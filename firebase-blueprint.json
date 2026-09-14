@@ -1,0 +1,167 @@
+{
+  "entities": {
+    "Setup": {
+      "title": "Trading Setup",
+      "description": "A record of a trading setup for experiential learning.",
+      "type": "object",
+      "properties": {
+        "asset": { "type": "string" },
+        "type": { "type": "string", "enum": ["BUY", "SELL"] },
+        "confidence": { "type": "number" },
+        "smcContext": { "type": "object" },
+        "elliottWave": { "type": "string" },
+        "outcome": { "type": "string", "enum": ["PENDING", "SUCCESS", "FAILURE"] },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "pnl": { "type": "number" },
+        "uid": { "type": "string" }
+      },
+      "required": ["asset", "type", "smcContext", "timestamp", "uid"]
+    },
+    "Strategy": {
+      "title": "Trading Strategy",
+      "description": "A validated combination of indicators and patterns.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "successRate": { "type": "number" },
+        "totalTrades": { "type": "integer" },
+        "parameters": { "type": "object" },
+        "isValidated": { "type": "boolean" },
+        "uid": { "type": "string" }
+      },
+      "required": ["name", "successRate", "totalTrades", "uid"]
+    },
+    "Goal": {
+      "title": "Trading Goal",
+      "description": "Short, medium, or long term performance goals.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "target": { "type": "number" },
+        "current": { "type": "number" },
+        "deadline": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["IN_PROGRESS", "ACHIEVED", "FAILED"] },
+        "uid": { "type": "string" }
+      },
+      "required": ["title", "target", "status", "uid"]
+    },
+    "Knowledge": {
+      "title": "Knowledge Base",
+      "description": "Uploaded rules, books, and strategies.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "uid": { "type": "string" }
+      },
+      "required": ["title", "content", "uid"]
+    },
+    "Skill": {
+      "title": "Agent Skill",
+      "description": "Auto-generated capability to handle specific market conditions.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "condition": { "type": "string" },
+        "action": { "type": "string" },
+        "successCount": { "type": "integer" },
+        "isActive": { "type": "boolean" },
+        "uid": { "type": "string" }
+      },
+      "required": ["name", "condition", "action", "uid"]
+    },
+    "AgentState": {
+      "title": "Agent Profile State",
+      "description": "Current psychological and optimization state of the agent.",
+      "type": "object",
+      "properties": {
+        "mood": { "type": "string", "enum": ["CONFIDENT", "NEUTRAL", "DISCIPLINED"] },
+        "volatilityThreshold": { "type": "number" },
+        "riskMultiplier": { "type": "number" },
+        "lastOptimization": { "type": "string", "format": "date-time" },
+        "uid": { "type": "string" }
+      },
+      "required": ["uid"]
+    },
+    "ChatMessage": {
+      "title": "Chat Message",
+      "description": "Interaction between user and agent.",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["user", "assistant"] },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "uid": { "type": "string" }
+      },
+      "required": ["role", "content", "timestamp", "uid"]
+    },
+    "AgentMemory": {
+      "title": "Agent Total Memory",
+      "description": "Singleton state per user keeping complex structured data.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "strategic": { "type": "object" },
+        "tactical": { "type": "object" },
+        "experience": { "type": "object" }
+      },
+      "required": ["uid"]
+    },
+    "EventMemory": {
+      "title": "Event Memory",
+      "description": "Episodic and Semantic memory points.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/setups": {
+      "schema": "Setup",
+      "description": "Collection of all trading setups for learning."
+    },
+    "/strategies": {
+      "schema": "Strategy",
+      "description": "Collection of validated strategies."
+    },
+    "/goals": {
+      "schema": "Goal",
+      "description": "User performance goals."
+    },
+    "/knowledge": {
+      "schema": "Knowledge",
+      "description": "User uploaded knowledge base."
+    },
+    "/skills": {
+      "schema": "Skill",
+      "description": "Auto-generated agent skills."
+    },
+    "/state": {
+      "schema": "AgentState",
+      "description": "Singleton-like state for the agent profile."
+    },
+    "/chats": {
+      "schema": "ChatMessage",
+      "description": "Chat history for the user."
+    },
+    "/agent_memory": {
+      "schema": "AgentMemory",
+      "description": "Full layered memory snapshot."
+    },
+    "/episodic_memory": {
+      "schema": "EventMemory",
+      "description": "Episodic events."
+    },
+    "/semantic_memory": {
+      "schema": "EventMemory",
+      "description": "Semantic knowledge."
+    }
+  }
+}
